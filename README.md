@@ -11,10 +11,6 @@ graph LR
     B --> C[Azure Storage Account<br/>$web container]
     C --> D[index.html]
 ```
-### Step 1 - We are going to create the Resource Group
-
-> Why use Resource Groups? A resource group is like a folder or box that holds all the resources tied to your project. You can delete everything in one click, see costs for one resource group (Helpful if you have many), and apply permissions to a whole group instead of individual resources.
-
 #### Phase 1: Create The Resource Group
   1. Log in to the Azure portal
   2. Type the name Resource group into the search bar at the top.
@@ -22,6 +18,7 @@ graph LR
   4. Type in your resource name: ex. rg-lab01
   5. Select the region that's near you.
   6. Click Review + Create
+      > Why use Resource Groups? A resource group is like a folder or box that holds all the resources tied to your project. You can delete everything in one click, see costs for one resource group (Helpful if you have many), and apply permissions to a whole group instead of individual resources.
 #### Phase 2: Create The Storage Account
   1. In the top Search bar, search for storage account.
   2. Click + Create
@@ -47,4 +44,15 @@ graph LR
      - Paste the following simple HTML code
       See the source: [index.html](./index.html)
       
-3. Save this file on your desktop or somewhere you can find it as **index.html**
+  3. Save this file on your desktop or somewhere you can find it as **index.html**
+#### Phase 4: Upload your content
+  1. Go back to the Azure portal. (You should still be on the Static website blade).
+  2. On the left menu, click on **Containers** (Under Data Storage).
+  3. You will see a new container named **$web**. This was created automatically. Click to open it.
+  4. Click **Upload** towards the top.
+  5. Browse for your ***idex.html** you just created and upload it.
+#### Phase 6: Validate The Site
+  1. Open a new browser tab.
+  2. Paste in the URL you saved from Phase 3.
+  3. Hit Enter.
+  4. You should see your "Hello from the Cloud!" message.
