@@ -56,3 +56,7 @@ graph LR
   2. Paste in the URL you saved from Phase 3.
   3. Hit Enter.
   4. You should see your "Hello from the Cloud!" message.
+
+### Troubleshooting / Common Issues
+    - Issue "404 - The requested content does not exist."
+        - Fix: Make sure you named your index.html file correctly. Azure is case-sensitive.
