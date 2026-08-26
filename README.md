@@ -153,5 +153,4 @@ Resource Groups → rg-lab01-reco → Delete resource group → confirm name →
 
 ---
 
-**Author:** Reco
-**Original Lab Author:** Jhante Charles
+**Author:** Dereco
