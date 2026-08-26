@@ -58,5 +58,18 @@ graph LR
   4. You should see your "Hello from the Cloud!" message.
 
 ### Troubleshooting / Common Issues
-    - Issue "404 - The requested content does not exist."
-        - Fix: Make sure you named your index.html file correctly. Azure is case-sensitive.
+- Issue "404 - The requested content does not exist."
+    - Fix: Make sure you named your index.html file correctly. Azure is case-sensitive.
+    - Fix: Did you upload the file to the $web container?
+- Issue: "Storage account name is already taken."
+  - Fix: Storage names must be unique across all of Azure, not just your account. Try adding some random numbers to the end.
+ 
+### Clean Up Your Resource Group
+##Important##: Always clean up your cloud environment to prevent suprise charges and to keep things neat.
+1. Go to Resource Groups
+2. Click your Resource Group.
+3. Click **Delete resource group**
+4. Type the name to confirm.
+5. Click Delete.
+
+
