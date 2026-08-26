@@ -1,77 +1,157 @@
-Creating A Static Website Using Azure
-==============================
-A public-facing resource in Azure. Using the concept of PaaS (Platform as a Service)
+# ☁️ Lab 01 — Hosting a Static Website on Azure Blob Storage
 
-## What You'll Learn
-- How to deploy a simple static website using the Azure platform without building out a server.
-## Architecture
-```mermaid
-graph LR
-    A[User<br/>Internet] --> B[Public URL]
-    B --> C[Azure Storage Account<br/>$web container]
-    C --> D[index.html]
-```
-🎥: Watch Me Create A Static Website
+![Azure](https://img.shields.io/badge/Azure-Blob%20Storage-0078D4?logo=microsoftazure&logoColor=white)
+![Level](https://img.shields.io/badge/Level-Beginner-brightgreen)
+![Status](https://img.shields.io/badge/Status-Completed-success)
+
+A hands-on lab where I deployed a fully serverless, public-facing website using **Azure Blob Storage's static website hosting** feature — no VM, no web server, no maintenance.
+
 ---
-#### Phase 1: Create The Resource Group
-  1. Log in to the Azure portal
-  2. Type the name Resource group into the search bar at the top.
-  3. Hit the + Create to create a new Resource group
-  4. Type in your resource name: ex. rg-lab01
-  5. Select the region that's near you.
-  6. Click Review + Create
-      > Why use Resource Groups? A resource group is like a folder or box that holds all the resources tied to your project. You can delete everything in one click, see costs for one resource group (Helpful if you have many), and apply permissions to a whole group instead of individual resources.
-#### Phase 2: Create The Storage Account
-  1. In the top Search bar, search for storage account.
-  2. Click + Create
-  3. On The Basics Tab:
-     - Resource Group: Select the RG you created in Phase 1 ex. rg-lab01
-     - Storage account name: Type in a unique name ex. stlab01[Your Name]
-     - Primary Service: Choose Azure Blob Storage
-     - Redundancy: Choose Locally redundant storage (LRS)
-  4. Click Review + Create
-  5. Click Create
-#### Phase 3: Enable Static Website Hosting
-  1. Click on the resource group you created in Phase 1, e.g., rg-lab01.
-  2. You should see the storage account you created in Phase 2, e.g., stlab01
-  3. Click the storage account. On the left side, you should see Data management.
-  4. Click Static Website under it.
-  5. Change Static Website to **enabled**.
-  6. In the **Index document name** field, put in: index.html
-  7. **Error document path** put in: 404.html (Optional but good practice)
-  8. Click Save.
-  9. Once saved, you should see a **primary endpoint** field. Copy down that address into Notepad. This is your new static website address. It should look similar to this (https://stlab01reco.z13.web.core.windows.net/)
-#### Phase 4: Create your HTML file for your Website
-  1. Open your text editor on your computer. I used VS Code but you can use the text editor of your choice.
-     - Paste the following simple HTML code
-      See the source: [index.html](./index.html)
-      
-  3. Save this file on your desktop or somewhere you can find it as **index.html**
-#### Phase 4: Upload your content
-  1. Go back to the Azure portal. (You should still be on the Static website blade).
-  2. On the left menu, click on **Containers** (Under Data Storage).
-  3. You will see a new container named **$web**. This was created automatically. Click to open it.
-  4. Click **Upload** towards the top.
-  5. Browse for your ***idex.html** you just created and upload it.
-#### Phase 6: Validate The Site
-  1. Open a new browser tab.
-  2. Paste in the URL you saved from Phase 3.
-  3. Hit Enter.
-  4. You should see your "Hello from the Cloud!" message.
 
-### Troubleshooting / Common Issues
-- Issue "404 - The requested content does not exist."
-    - Fix: Make sure you named your index.html file correctly. Azure is case-sensitive.
-    - Fix: Did you upload the file to the $web container?
-- Issue: "Storage account name is already taken."
-  - Fix: Storage names must be unique across all of Azure, not just your account. Try adding some random numbers to the end.
- 
-### Clean Up Your Resource Group
-##Important##: Always clean up your cloud environment to prevent suprise charges and to keep things neat.
-1. Go to Resource Groups
-2. Click your Resource Group.
-3. Click **Delete resource group**
-4. Type the name to confirm.
-5. Click Delete.
+## 📌 Overview
 
+Most people's first instinct when they need to host a website is to spin up a server. This lab skips that entirely.
 
+Instead, I used **Azure Blob Storage** in **PaaS (Platform as a Service)** mode — Azure handles the infrastructure, and I only had to worry about the content. This is the same pattern behind many real-world static sites, landing pages, and documentation portals.
+
+| Detail | Value |
+|---|---|
+| **Difficulty** | Beginner |
+| **Time to complete** | ~30 minutes |
+| **Cloud Provider** | Microsoft Azure |
+| **Core Service** | Azure Storage Account (Static Website Hosting) |
+| **Cost** | Free Tier eligible |
+
+---
+
+## 🏗️ Architecture
+
+```mermaid
+flowchart LR
+    A[🧑 User<br/>Internet Browser] -->|HTTP Request| B[🌐 Public Endpoint URL]
+    B --> C[📦 Azure Storage Account]
+    C --> D["$web Container<br/>(public, static hosting)"]
+    D --> E[📄 index.html]
+    E -->|Rendered Response| A
+```
+
+**How it works:** A user's browser sends a request to the storage account's public endpoint. Azure routes that request into the special `$web` container, retrieves `index.html`, and returns it — all without a traditional web server in the middle.
+
+---
+
+## ✅ Prerequisites
+
+- Active Azure subscription (Free Tier works)
+- Basic text editor (VS Code, Notepad, etc.)
+- Familiarity with the Azure Portal basics
+
+---
+
+## 🏷️ Naming Convention
+
+| Resource | Name Used |
+|---|---|
+| Resource Group | `rg-lab01-reco` |
+| Region | East US |
+| Storage Account | `stlab01reco` |
+
+> Storage account names must be **globally unique across all of Azure**, lowercase only, no special characters.
+
+---
+
+## 🚀 Deployment Steps
+
+### 1. Create the Resource Group
+Groups all lab resources together for easy management and cleanup.
+```
+Resource Groups → + Create → rg-lab01-reco → East US → Review + Create
+```
+
+### 2. Create the Storage Account
+```
+Storage Accounts → + Create
+  Resource Group: rg-lab01-reco
+  Name: stlab01reco
+  Region: East US
+  Performance: Standard
+  Redundancy: LRS (Locally-Redundant Storage)
+```
+
+### 3. Enable Static Website Hosting
+```
+Storage Account → Data management → Static website → Enabled
+  Index document name: index.html
+  Error document path: 404.html
+```
+📎 Copy the **Primary Endpoint URL** generated here — that's the live site address.
+
+### 4. Create the Web Page
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My First Cloud Site</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; margin-top: 50px; background-color: #f0f0f0; }
+        h1 { color: #0078d4; }
+    </style>
+</head>
+<body>
+    <h1>Hello from the Cloud!</h1>
+    <p>This site is hosted on Azure Blob Storage.</p>
+    <p>Deployed by: Reco</p>
+</body>
+</html>
+```
+Save as `index.html`.
+
+### 5. Upload the File
+```
+Storage Account → Containers → $web → Upload → index.html
+```
+
+### 6. Validate
+Visit the Primary Endpoint URL in a browser. You should see **"Hello from the Cloud!"**
+
+---
+
+## 🐛 Troubleshooting
+
+| Issue | Cause | Fix |
+|---|---|---|
+| `404 - content does not exist` | File not named exactly `index.html` | Azure is case-sensitive — rename and re-upload |
+| `404` (again) | Uploaded to wrong container | Confirm the file is in the **`$web`** container specifically |
+| Storage account name rejected | Name already taken globally | Append random digits, e.g. `stlab01reco42` |
+
+---
+
+## 🧹 Cleanup
+
+To avoid unnecessary cost, delete the resource group when finished:
+```
+Resource Groups → rg-lab01-reco → Delete resource group → confirm name → Delete
+```
+
+---
+
+## 🔐 Security Notes
+
+- Only the **`$web`** container is meant to be public — never enable public access on other containers in the same account.
+- **LRS** is fine for a lab; production workloads should consider **GRS** for regional redundancy.
+- The default endpoint is **HTTP only**. For production, put **Azure CDN** or **Front Door** in front of it for a custom domain and free HTTPS.
+- Delete idle resources promptly — unused storage accounts are unnecessary attack surface.
+
+---
+
+## 📚 What I Learned
+
+- Core differences between **IaaS** and **PaaS** hosting models
+- How Azure Blob Storage's static website feature works under the hood
+- Azure resource naming constraints and global uniqueness rules
+- Basic cost-conscious resource cleanup practices
+
+---
+
+**Author:** Reco
+**Original Lab Author:** Jhante Charles
