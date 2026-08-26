@@ -11,6 +11,8 @@ graph LR
     B --> C[Azure Storage Account<br/>$web container]
     C --> D[index.html]
 ```
+🎥: Watch Me Create A Static Website
+---
 #### Phase 1: Create The Resource Group
   1. Log in to the Azure portal
   2. Type the name Resource group into the search bar at the top.
