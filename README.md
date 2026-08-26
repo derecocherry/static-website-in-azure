@@ -153,4 +153,4 @@ Resource Groups → rg-lab01-reco → Delete resource group → confirm name →
 
 ---
 
-**Author:** Dereco
+**Author:** Dereco Cherry
