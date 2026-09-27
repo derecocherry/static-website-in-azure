@@ -1,4 +1,5 @@
 # 📷 Video Walkthrough
+https://www.loom.com/share/1768e2774f74423ea7ebc5a82545c2ce
 
 # ☁️ Lab 01 — Hosting a Static Website on Azure Blob Storage
 
